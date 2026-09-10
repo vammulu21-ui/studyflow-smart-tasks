@@ -204,6 +204,8 @@ function Index() {
   const deleteTask = (id: string) =>
     setTasks((prev) => prev.filter((t) => t.id !== id));
 
+  const nextQuote = () => setQuoteIndex((i) => (i + 1) % QUOTES.length);
+
   const quote = QUOTES[quoteIndex] ?? QUOTES[0]!;
 
   return (
