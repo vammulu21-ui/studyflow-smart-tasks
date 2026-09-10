@@ -204,7 +204,7 @@ function Index() {
   const deleteTask = (id: string) =>
     setTasks((prev) => prev.filter((t) => t.id !== id));
 
-  const quote = QUOTES[quoteIndex];
+  const quote = QUOTES[quoteIndex] ?? QUOTES[0]!;
 
   return (
     <div className="relative min-h-screen w-full overflow-hidden font-sans text-ink antialiased">
