@@ -149,7 +149,7 @@ function Index() {
       6000,
     );
     return () => window.clearInterval(t);
-  }, []);
+  }, [quoteIndex]);
 
   const stats = useMemo(() => {
     const completed = tasks.filter((t) => t.completed).length;
