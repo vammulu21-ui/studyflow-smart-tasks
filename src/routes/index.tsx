@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Plus, Sigma, Check, Hourglass, Trash2, Undo2 } from "lucide-react";
+import { Plus, Sigma, Check, Hourglass, Trash2, Undo2, RefreshCw } from "lucide-react";
 import avatarImg from "../assets/avatar.jpg";
 
 export const Route = createFileRoute("/")({
@@ -149,7 +149,7 @@ function Index() {
       6000,
     );
     return () => window.clearInterval(t);
-  }, []);
+  }, [quoteIndex]);
 
   const stats = useMemo(() => {
     const completed = tasks.filter((t) => t.completed).length;
@@ -203,6 +203,8 @@ function Index() {
 
   const deleteTask = (id: string) =>
     setTasks((prev) => prev.filter((t) => t.id !== id));
+
+  const nextQuote = () => setQuoteIndex((i) => (i + 1) % QUOTES.length);
 
   const quote = QUOTES[quoteIndex] ?? QUOTES[0]!;
 
@@ -393,8 +395,18 @@ function Index() {
             aria-label="Daily motivation"
             className="flex min-h-[220px] animate-rise flex-col justify-between rounded-2xl gradient-hero p-6 text-primary-foreground shadow-xl shadow-brand/30 [animation-delay:320ms]"
           >
-            <div className="text-xs font-semibold tracking-[0.2em] uppercase opacity-80">
-              Daily Motivation
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-semibold tracking-[0.2em] uppercase opacity-80">
+                Daily Motivation
+              </div>
+              <button
+                type="button"
+                onClick={nextQuote}
+                className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1.5 text-xs font-semibold backdrop-blur-sm transition hover:bg-white/30 active:scale-95"
+              >
+                <RefreshCw className="size-3.5" aria-hidden />
+                New Motivation
+              </button>
             </div>
             <blockquote key={quoteIndex} className="animate-quote">
               <p className="mt-4 font-display text-2xl leading-snug font-bold">
